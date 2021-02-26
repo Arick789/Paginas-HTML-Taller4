@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Validar solo numeros</title>
+
+    <script>
+        var numeros = document.getElementById("numeros");
+        var error = document.getElementById("error");
+        error.style.color="red";
+
+        //e es el elemento que se recibe del teclado
+        function solonumeros(e){
+
+            //esto alamacena la entra del teclado
+            key=e.keyCode || e.which;
+
+            //almacenar lo que este en la entrada
+            teclado = String.fromCharCode(key);
+            
+            //Variable con los numeros validos
+            numeros="0123456789";
+
+            //Teclas especiales que se permiten
+            especiales="8-37-38-46";
+
+            
+            teclado_especial=false;
+
+            for(var i in especiales){
+
+                if(key==especiales[i]){
+                    teclado_especial=true;
+                }
+
+            }
+
+            if(numeros.indexOf(teclado)==-1 && !teclado_especial){
+                return false;
+            }
+        }
+
+        
+
+        function EnviarFormulario(){
+            console.log("Enviando formulario...");
+
+            var mensajesError = [];
+
+            if(solonumeros.value != Number.isNaN || solonumeros.value === ''){
+                alert("No es un numero o esta vacio");
+            } else if (solonumeros.value === Number.isNaN){
+
+                alert ("su numero es: "+numeros+" y su longitud es de:" + solonumeros.length);
+
+            }
+
+            return false;
+        }
+
+
+    </script>
+</head>
+<body>
+    <h1>Solo numeros</h1>
+    <li><a href="../../loginvista.html">Datos de una persona</a></li>
+    <li><a href="../Cuestionario/examen.html">Examen</a></li>
+    <li><a href="">Solo numeros</a></li>
+    <li><a href="">RadioButtons de buscadores</a></li>
+    <li><a href="../formularioregistro/regi.html">Formulario para registro</a></li>
+
+    <article>
+        <form>
+            <h1>Validacion de caja de texto: Solo numeros</h1>
+            <br>
+            Ingrese numero:
+            <br>
+            <!-- Caja de texto -->
+            <input type="text" name="numero" onkeypress="return solonumeros(event)" onpaste="return false"> 
+            <input type="submit" onclick="return EnviarFormulario()" value="Enviar">      
+            
+        </form>
+        <div id="error"></div>
+    </article>
+</body>
+</html>
